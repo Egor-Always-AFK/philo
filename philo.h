@@ -29,9 +29,9 @@ typedef struct s_philo
 typedef struct s_info
 {
 	int number_of_philo;
-	uint64_t time_to_eat;
-	uint64_t time_to_sleep;
-	uint64_t time_to_die;
+	int time_to_eat;
+	int time_to_sleep;
+	int time_to_die;
 	int number_of_eat;
 	struct timeval create_time;
 	pthread_mutex_t *forks;
@@ -61,5 +61,7 @@ void sleeping(t_philo *philo);
 void thinking(t_philo *philo);
 
 void *monitor(void *arg);
+
+void my_usleep(int time);
 
 #endif 
