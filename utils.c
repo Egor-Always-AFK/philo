@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 16:12:55 by ocapers           #+#    #+#             */
-/*   Updated: 2022/05/21 13:15:23 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/05/23 11:52:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ void print_message(t_philo *philo, char *str)
 	long long		ms;
 	struct timeval	time;
 
-	gettimeofday(&time, NULL);
-	ms = time_to_ms(time) - time_to_ms(philo->info->create_time);
 	if (!philo->info->im_dead)
+	{
+		gettimeofday(&time, NULL);
+		ms = time_to_ms(time) - time_to_ms(philo->info->create_time);
 		printf("%lld %d %s\n", ms, philo->number + 1, str);
+	}
 }
 
 void my_usleep(int time)
@@ -37,7 +39,7 @@ void my_usleep(int time)
 	int i;
 
 	i = 1;
-	while (i <= (time * 1000))
+	while (i <= (time))
 	{
 		usleep(200);
 		i += 200;

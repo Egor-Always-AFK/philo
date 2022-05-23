@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 13:58:00 by ocapers           #+#    #+#             */
-/*   Updated: 2022/05/21 11:05:56 by marvin           ###   ########.fr       */
+/*   Updated: 2022/05/23 13:38:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ void create_philos(t_info *info)
 	}
 }
 
+void free_philos(t_info *info)
+{
+	free(info->philo);
+	int i = 0;
+	while (i < info->number_of_philo)
+	{
+		pthread_mutex_destroy(&info->forks[i]);
+		i++;
+	}
+	free(info->forks);
+}
 
 int main(int argc, char **argv)
 {
@@ -43,4 +54,5 @@ int main(int argc, char **argv)
 		pthread_join(info.philo[i].thread, NULL);
 		i++;
 	}
+	free_philos(&info);
 }
