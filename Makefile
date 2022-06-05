@@ -2,7 +2,7 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = -pthread
+CFLAGS = #-g -fsanitize=thread
 
 HEADER = philo.h
 
@@ -16,7 +16,7 @@ $(NAME) : $(OBJS) $(HEADER)
 	gcc $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o : %.c $(HEADER)
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)

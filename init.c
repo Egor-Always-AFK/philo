@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:40:20 by ocapers           #+#    #+#             */
-/*   Updated: 2022/05/21 10:36:49 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/05 19:17:39 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void init(t_info *info, char **argv)
 	info->time_to_sleep = atoi(argv[4]);
 	if (argv[5] != NULL)
 		info->number_of_eat = atoi(argv[5]);
+	gettimeofday(&info->create_time, NULL);
+	pthread_mutex_init(&info->finish_mutex, NULL);
+	pthread_mutex_init(&info->print_mutex, NULL);
 	info->im_dead = 0;
 	info->im_eat_many_times = 0;
 	info->philo = (t_philo *)malloc(sizeof(t_philo) * info->number_of_philo);
@@ -28,6 +31,7 @@ void init(t_info *info, char **argv)
 	while (i < info->number_of_philo)
 	{
 		pthread_mutex_init(&info->forks[i], NULL);
+		pthread_mutex_init(&info->philo[i].check_mutex, NULL);
 		info->philo[i].number = i;
 		info->philo[i].is_eat = 0;
 		info->philo[i].eat_count = 0;
@@ -37,6 +41,7 @@ void init(t_info *info, char **argv)
 		else
 			info->philo[i].left_hand = &info->forks[i - 1];
 		info->philo[i].info = info;
+		gettimeofday(&info->philo[i].last_eat, 0);
 		i++;
 	}
 }

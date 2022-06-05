@@ -20,6 +20,7 @@ typedef struct s_philo
 	int is_eat;
 	pthread_mutex_t *left_hand;
 	pthread_mutex_t *right_hand;
+	pthread_mutex_t check_mutex;
 	int eat_count;
 	pthread_t thread;
 	struct timeval last_eat;
@@ -35,6 +36,8 @@ typedef struct s_info
 	int number_of_eat;
 	struct timeval create_time;
 	pthread_mutex_t *forks;
+	pthread_mutex_t finish_mutex;
+	pthread_mutex_t print_mutex;
 	t_philo *philo;
 	int im_dead;
 	int im_eat_many_times;
@@ -48,7 +51,7 @@ uint64_t get_time(void);
 
 void error_message(char *error_message);
 
-long long	time_to_ms(struct timeval time);
+long	time_to_ms(struct timeval time);
 
 void print_message(t_philo *philo, char *str);
 
@@ -62,6 +65,8 @@ void thinking(t_philo *philo);
 
 void *monitor(void *arg);
 
-void my_usleep(int time);
+void	ft_usleep(long int time);
+
+long	ft_current_time(void);
 
 #endif 
