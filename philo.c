@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:46:59 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/12 18:45:29 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/12 19:15:26 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	eating(t_philo *philo)
 
 	pthread_mutex_lock(&philo->check_mutex);
 	pthread_mutex_lock(&philo->info->finish_mutex);
-	gettimeofday(&philo->last_eat, NULL);
 	print_message(philo, "is eating");
 	philo->eat_count += 1;
 	if (philo->info->number_of_eat != 0
@@ -36,6 +35,7 @@ void	eating(t_philo *philo)
 		philo->info->im_eat_many_times += 1;
 	pthread_mutex_unlock(&philo->info->finish_mutex);
 	ft_usleep(philo->info->time_to_eat);
+	gettimeofday(&philo->last_eat, NULL);
 	pthread_mutex_unlock(philo->right_hand);
 	pthread_mutex_unlock(philo->left_hand);
 	pthread_mutex_unlock(&philo->check_mutex);
@@ -56,7 +56,7 @@ void	*philo(void *argv)
 	philo = argv;
 	gettimeofday(&philo->create_time, NULL);
 	if (philo->number % 2 == 0)
-		usleep(2500);
+		usleep(100);
 	while (1)
 	{
 		pickup_fork(philo);

@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:50:00 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/12 17:58:14 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/12 19:25:50 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ void		init_part_two(t_info *info);
 void		part_of_monitor( t_info *info, int i);
 
 long		ft_atoi(const char *str);
+
+long	find_diff(struct timeval val1, struct timeval val2);
 
 #endif 

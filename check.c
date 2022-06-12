@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:23:59 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/12 16:56:54 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/12 19:24:34 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,11 @@ int	check_rmd(const char *str)
 		i++;
 	}
 	return (flag);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 16:12:55 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/12 18:25:39 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/12 19:24:54 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ long	ft_current_time(void)
 	return (value);
 }
 
-int	ft_isdigit(int c)
+long	find_diff(struct timeval val1, struct timeval val2)
 {
-	if (c >= '0' && c <= '9')
-		return (0);
-	return (1);
+	long	conv_sec;
+	long	conv_usec;
+
+	conv_sec = (val1.tv_sec - val2.tv_sec) * 1000;
+	conv_usec = (val1.tv_usec - val2.tv_usec) / 1000;
+	return (conv_sec + conv_usec);
 }
