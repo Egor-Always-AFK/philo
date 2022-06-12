@@ -6,45 +6,35 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 13:58:00 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/05 19:16:22 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/12 17:22:40 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void create_philos(t_info *info, pthread_t thread)
+void	create_philos(t_info *info)
 {
-	int i = -1;
+	int	i;
 
-
-	while (++i < info->number_of_philo)
-	{
-		pthread_create(&info->philo[i].thread, NULL, philo, &info->philo[i]);
-		pthread_detach(info->philo[i].thread);
-	}
-	monitor(info);
-}
-
-void free_philos(t_info *info)
-{
-	free(info->philo);
-	int i = 0;
+	i = 0;
 	while (i < info->number_of_philo)
 	{
-		pthread_mutex_destroy(&info->forks[i]);
+		pthread_create(&info->philo[i].thread, NULL, philo, &info->philo[i]);
 		i++;
 	}
-	free(info->forks);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_info info;
-	pthread_t thread;
-	
+	t_info		info;
+	pthread_t	thread;
+
+	thread = NULL;
 	if (argc < 5 || argc > 6)
-		printf("error!\ninvalid number of arguments");	
+		printf("error!\ninvalid number of arguments");
+	if (check(argc, argv) == 1)
+		return (1);
 	init(&info, argv);
-	create_philos(&info, thread);
-	free_philos(&info);
+	create_philos(&info);
+	monitor(&info);
 }

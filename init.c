@@ -6,28 +6,34 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:40:20 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/05 19:17:39 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/12 16:58:34 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void init(t_info *info, char **argv)
+void	init(t_info *info, char **argv)
 {
-	info->number_of_philo = atoi(argv[1]);
-	info->time_to_die = atoi(argv[2]);
-	info->time_to_eat = atoi(argv[3]);
-	info->time_to_sleep = atoi(argv[4]);
+	info->number_of_philo = ft_atoi(argv[1]);
+	info->time_to_die = ft_atoi(argv[2]);
+	info->time_to_eat = ft_atoi(argv[3]);
+	info->time_to_sleep = ft_atoi(argv[4]);
 	if (argv[5] != NULL)
-		info->number_of_eat = atoi(argv[5]);
-	gettimeofday(&info->create_time, NULL);
+		info->number_of_eat = ft_atoi(argv[5]);
 	pthread_mutex_init(&info->finish_mutex, NULL);
 	pthread_mutex_init(&info->print_mutex, NULL);
 	info->im_dead = 0;
 	info->im_eat_many_times = 0;
 	info->philo = (t_philo *)malloc(sizeof(t_philo) * info->number_of_philo);
 	info->forks = malloc(sizeof(pthread_mutex_t) * info->number_of_philo);
-	int i = 0;
+	init_part_two(info);
+}
+
+void	init_part_two(t_info *info)
+{
+	int	i;
+
+	i = 0;
 	while (i < info->number_of_philo)
 	{
 		pthread_mutex_init(&info->forks[i], NULL);
@@ -44,4 +50,25 @@ void init(t_info *info, char **argv)
 		gettimeofday(&info->philo[i].last_eat, 0);
 		i++;
 	}
+}
+
+long	ft_atoi(const char *str)
+{
+	long	val;
+	int		sign;
+
+	val = 0;
+	sign = 1;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-')
+		sign *= -1;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
+	{
+		val = val * 10 + *str - '0';
+		str++;
+	}
+	return (val * sign);
 }

@@ -2,11 +2,10 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = #-g -fsanitize=thread
-
+CFLAGS = -Wall -Werror -Wextra
 HEADER = philo.h
 
-SRCS =  main.c init.c utils.c philo.c monitor.c \
+SRCS =  init.c main.c utils.c philo.c monitor.c check.c\
 
 OBJS = $(SRCS:.c=.o)
 
