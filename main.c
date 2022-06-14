@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 13:58:00 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/12 17:22:40 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/13 19:01:21 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	main(int argc, char **argv)
 		return (1);
 	init(&info, argv);
 	create_philos(&info);
+	usleep(100);
 	monitor(&info);
 }

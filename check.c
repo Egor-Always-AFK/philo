@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:23:59 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/12 19:24:34 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/13 18:20:45 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check(int ac, char **av)
 				"a duration of 60 ms at least.\n");
 			return (1);
 		}
-		if (ft_atoi_shell(av[i]) <= 1)
+		if (ft_atoi_shell(av[i]) < 1)
 		{
 			printf("Parameter must be a positive number type of int.\n");
 			return (1);

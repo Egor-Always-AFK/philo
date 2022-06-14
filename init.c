@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:40:20 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/12 16:58:34 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/13 18:19:52 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init(t_info *info, char **argv)
 	info->time_to_sleep = ft_atoi(argv[4]);
 	if (argv[5] != NULL)
 		info->number_of_eat = ft_atoi(argv[5]);
-	pthread_mutex_init(&info->finish_mutex, NULL);
 	pthread_mutex_init(&info->print_mutex, NULL);
 	info->im_dead = 0;
 	info->im_eat_many_times = 0;

@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:50:00 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/12 19:25:50 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/13 18:19:44 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,61 +37,60 @@ typedef struct s_philo
 
 typedef struct s_info
 {
-	int				number_of_philo;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				time_to_die;
-	int				number_of_eat;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	finish_mutex;
-	pthread_mutex_t	print_mutex;
-	t_philo			*philo;
-	int				im_dead;
-	int				im_eat_many_times;
+	int								number_of_philo;
+	unsigned long long				time_to_eat;
+	unsigned long long				time_to_sleep;
+	unsigned long long				time_to_die;
+	int								number_of_eat;
+	pthread_mutex_t					*forks;
+	pthread_mutex_t					print_mutex;
+	t_philo							*philo;
+	int								im_dead;
+	int								im_eat_many_times;
 }t_info;
 
-int			main(int argc, char **argv);
+int						main(int argc, char **argv);
 
-void		init(t_info *info, char **argv);
+void					init(t_info *info, char **argv);
 
-long		get_time(void);
+long					get_time(void);
 
-void		error_message(char *error_message);
+void					error_message(char *error_message);
 
-long		time_to_ms(struct timeval time);
+unsigned long long		time_to_ms(struct timeval time);
 
-void		print_message(t_philo *philo, char *str);
+void					print_message(t_philo *philo, char *str);
 
-void		*philo(void *argv);
+void					*philo(void *argv);
 
-void		pickup_fork(t_philo *philo);
+void					pickup_fork(t_philo *philo);
 
-void		sleeping(t_philo *philo);
+void					sleeping(t_philo *philo);
 
-void		thinking(t_philo *philo);
+void					thinking(t_philo *philo);
 
-void		*monitor(void *arg);
+void					*monitor(void *arg);
 
-void		ft_usleep(long int time);
+void					ft_usleep(unsigned long long time);
 
-long		ft_current_time(void);
+unsigned long long		ft_current_time(void);
 
-int			check(int ac, char **av);
+int						check(int ac, char **av);
 
-int			ft_atoi_shell(const char *str);
+int						ft_atoi_shell(const char *str);
 
-int			ft_is_numeric_arg(const char *str);
+int						ft_is_numeric_arg(const char *str);
 
-int			ft_isdigit(int c);
+int						ft_isdigit(int c);
 
-int			check_rmd(const char *str);
+int						check_rmd(const char *str);
 
-void		init_part_two(t_info *info);
+void					init_part_two(t_info *info);
 
-void		part_of_monitor( t_info *info, int i);
+void					part_of_monitor( t_info *info, int i);
 
-long		ft_atoi(const char *str);
+long					ft_atoi(const char *str);
 
-long	find_diff(struct timeval val1, struct timeval val2);
+unsigned long long		find_diff(struct timeval val1, struct timeval val2);
 
 #endif 

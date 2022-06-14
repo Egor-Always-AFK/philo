@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:46:59 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/12 19:53:56 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/13 18:17:51 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,17 @@ void	sleeping(t_philo *philo)
 
 void	eating(t_philo *philo)
 {
-
 	pthread_mutex_lock(&philo->check_mutex);
-	pthread_mutex_lock(&philo->info->finish_mutex);
+	gettimeofday(&philo->last_eat, NULL);
+	pthread_mutex_unlock(&philo->check_mutex);
 	print_message(philo, "is eating");
+	ft_usleep(philo->info->time_to_eat);
 	philo->eat_count += 1;
 	if (philo->info->number_of_eat != 0
 		&& (philo->eat_count == philo->info->number_of_eat))
 		philo->info->im_eat_many_times += 1;
-	pthread_mutex_unlock(&philo->info->finish_mutex);
-	ft_usleep(philo->info->time_to_eat);
-	gettimeofday(&philo->last_eat, NULL);
 	pthread_mutex_unlock(philo->right_hand);
 	pthread_mutex_unlock(philo->left_hand);
-	pthread_mutex_unlock(&philo->check_mutex);
 }
 
 void	pickup_fork(t_philo *philo)
@@ -63,10 +60,6 @@ void	*philo(void *argv)
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
-		pthread_mutex_lock(&philo->info->finish_mutex);
-		if (philo->info->im_dead)
-			break;
-		pthread_mutex_unlock(&philo->info->finish_mutex);
 	}
 	return (NULL);
 }
