@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:46:59 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/13 18:17:51 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/16 16:20:06 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*philo(void *argv)
 
 	philo = argv;
 	gettimeofday(&philo->create_time, NULL);
-	if (philo->number % 2 == 0)
+	if (philo->number % 2 != 0)
 		usleep(100);
 	while (1)
 	{
